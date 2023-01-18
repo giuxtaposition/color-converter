@@ -12,7 +12,6 @@
 
 	function onOverlap(selected: ColorModelType, optionToRemove: ColorModelType | null) {
 		if (selected === optionToRemove) {
-			console.log('OVERLAP FUNCTION');
 			updateSelect(colorModels[0]);
 		}
 	}
