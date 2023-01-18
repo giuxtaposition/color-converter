@@ -1,18 +1,17 @@
 <script lang="ts">
 	import { COLOR_MODELS_MIN_MAX, type ColorModelType } from '$lib/types/ColorModel';
 	import { InputError } from '$lib/types/Error';
+	import { fade } from 'svelte/transition';
 
 	export let colorModelSelected: ColorModelType;
 	export let error: InputError | null;
 	export let onInputChange: (values: string[]) => void;
-	let input = '';
+	let input = '(0,0,0)';
 
-	$: hint = () => {
-		const allMinMax = COLOR_MODELS_MIN_MAX[colorModelSelected];
+	$: hint = COLOR_MODELS_MIN_MAX[colorModelSelected]
+		.map(([min, max]) => `${min} < value < ${max}`)
+		.join(', ');
 
-		return allMinMax.map((min_max) => `${min_max[0]} < value < ${min_max[1]}`).join(', ');
-	};
-	$: isValidInput = error === null;
 	$: handleChange(input, colorModelSelected);
 
 	function handleChange(input: string, colorModelSelected: ColorModelType) {
@@ -34,8 +33,7 @@
 	function validate(values: string[]): InputError | null {
 		for (const [index, value] of values.entries()) {
 			const valueAsInt = parseInt(value);
-			const min = COLOR_MODELS_MIN_MAX[colorModelSelected][index][0];
-			const max = COLOR_MODELS_MIN_MAX[colorModelSelected][index][1];
+			const [min, max] = COLOR_MODELS_MIN_MAX[colorModelSelected][index];
 
 			if (valueAsInt < min || valueAsInt > max) {
 				return InputError.InvalidValue;
@@ -52,11 +50,11 @@
 		bind:value={input}
 		aria-label="color input"
 		aria-required="true"
-		aria-invalid={!isValidInput}
+		aria-invalid={error !== null}
 	/>
-	<div class="hint">({hint()})</div>
+	<div class="hint">({hint})</div>
 	{#if error}
-		<div class="errorMessage" role="alert">
+		<div in:fade={{ delay: 200, duration: 500 }} class="errorMessage" role="alert">
 			<p>{error}</p>
 		</div>
 	{/if}
@@ -74,6 +72,9 @@ input
 
 input[aria-invalid="true"]
 	border: 1px solid #f47171
+
+input:hover
+	border-color: common.$brand-600
 
 .hint
 	width: 200px

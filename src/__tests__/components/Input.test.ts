@@ -15,8 +15,7 @@ describe('Input', () => {
 		render(Input, {
 			colorModelSelected: representation,
 			onInputChange: vi.fn(),
-			error: null,
-			onError: vi.fn()
+			error: null
 		});
 		expect(screen.getByText(value)).toBeVisible();
 	});

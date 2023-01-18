@@ -62,7 +62,8 @@ async function singleGet(
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-		}
+		},
+		cache: 'force-cache'
 	});
 
 	if (response.status === 200) {

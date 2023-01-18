@@ -70,7 +70,7 @@
 		<Output {output} error={outputError} />
 	</div>
 
-	<ShowColor color={colorInRGB} />
+	<ShowColor color={colorInRGB} {isLoading} />
 
 	<ConvertButton isDisabled={inputError !== null} {isLoading} onClick={onSubmit} />
 </main>
@@ -78,22 +78,26 @@
 <style lang="sass">
 @use '../lib/styles/common'
 
+:global(body)
+	margin: 0
+	background-color: common.$brand-50
+	min-height: 100vh
+
 main
 	font-size: 16px
 	display: flex
 	flex-direction: column
 	align-items: center
 	justify-content: center
-	padding: 0
-	margin: 0
-	min-height: 100vh
+	margin: 6rem
+	padding: 2rem
+	background-color: white
 	gap: 2rem
+	box-shadow: common.$shadow
+	border-radius: 5px
 
 .input, .output
 	display: flex
 	flex-direction: row
 	align-items: center
-
-.box
-	@include common.box
 </style>

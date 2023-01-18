@@ -3,3 +3,11 @@
 </script>
 
 <h1>{title}</h1>
+
+<style lang="sass">
+@use '../styles/common'
+h1
+	color: transparent
+	background-clip: text
+	background-image: linear-gradient(to right, common.$brand-400, common.$brand-600)
+</style>

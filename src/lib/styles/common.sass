@@ -1,5 +1,10 @@
 $border: 1px solid #e8eaed
 $shadow: 0 1px 3px -2px #9098a9
+$brand-50: #EDFDFD
+$brand-300: #76E4F7
+$brand-500: #00B5D8
+$brand-400: #0BC5EA
+$brand-600: #00A3C4
 
 @mixin textbox
     display: block
@@ -10,10 +15,12 @@ $shadow: 0 1px 3px -2px #9098a9
     box-shadow: $shadow
     width: 200px
     height: 20px
+    font-size: 1rem
 
 @mixin textbox-wrapper
     margin-top: 3.5rem
     height: 5rem
+    margin-right: 2rem
 
 @mixin error
     margin-top: 0.5rem
@@ -25,3 +32,4 @@ $shadow: 0 1px 3px -2px #9098a9
     width: 200px
     height: 200px
     border: $border
+    box-shadow: $shadow

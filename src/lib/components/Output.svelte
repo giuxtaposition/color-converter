@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import type { OutputError } from '$lib/types/Error';
 
 	export let error: OutputError | null;
@@ -10,7 +11,7 @@
 		{output}
 	</output>
 	{#if error}
-		<div class="errorMessage" role="alert">
+		<div in:fade={{ delay: 200, duration: 500 }} class="errorMessage" role="alert">
 			<p>{error}</p>
 		</div>
 	{/if}

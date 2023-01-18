@@ -53,6 +53,12 @@ describe('Home page', () => {
 
 			await user.selectOptions(screen.getByRole('combobox', { name: /From:/i }), options[0]);
 
+			await userEvent.clear(
+				screen.getByRole('textbox', {
+					name: /color input/i
+				})
+			);
+
 			await user.type(screen.getByRole('textbox', { name: /color input/i }), '(56,');
 
 			await waitFor(() => {
@@ -77,11 +83,17 @@ describe('Home page', () => {
 
 		await userEvent.selectOptions(screen.getByRole('combobox', { name: /From:/i }), options[0]);
 
+		await userEvent.clear(
+			screen.getByRole('textbox', {
+				name: /color input/i
+			})
+		);
+
 		await userEvent.type(screen.getByRole('textbox'), value);
 
 		await waitFor(() => {
-			expect(screen.getByRole('textbox', { name: /color input/i })).toBeInvalid();
 			expect(screen.getByText(InputError.InvalidValue)).toBeVisible();
+			expect(screen.getByRole('textbox', { name: /color input/i })).toBeInvalid();
 		});
 	});
 
@@ -99,6 +111,12 @@ describe('Home page', () => {
 		});
 
 		await userEvent.selectOptions(screen.getByRole('combobox', { name: /From:/i }), options[0]);
+
+		await userEvent.clear(
+			screen.getByRole('textbox', {
+				name: /color input/i
+			})
+		);
 
 		await userEvent.type(screen.getByRole('textbox'), value);
 
@@ -129,13 +147,6 @@ describe('Home page', () => {
 
 	test('should enable convert button if input is valid', async () => {
 		render(Page);
-
-		await userEvent.type(
-			screen.getByRole('textbox', {
-				name: /color input/i
-			}),
-			'0,0,0'
-		);
 
 		await waitFor(() => {
 			expect(
