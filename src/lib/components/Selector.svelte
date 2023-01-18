@@ -30,3 +30,25 @@
 		{/each}
 	</select>
 </div>
+
+<style lang="sass">
+@use '../styles/common'
+
+div
+	margin: 2rem
+	width: 75px
+	height: 5rem
+
+label
+	font-size: 1rem
+
+select
+	margin-top: 0.5rem
+	padding: 0.3rem 0.2rem
+	width: 100%
+	border: common.$border
+	border-radius: 5px
+	background: white
+	box-shadow: common.$shadow
+	cursor: pointer
+</style>

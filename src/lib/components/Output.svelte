@@ -5,21 +5,22 @@
 	export let output: string;
 </script>
 
-<div>
+<div class="wrapper">
 	<output aria-label="color output">
 		{output}
 	</output>
 	{#if error}
-		<div id="errorMessage" role="alert">
+		<div class="errorMessage" role="alert">
 			<p>{error}</p>
 		</div>
 	{/if}
 </div>
 
 <style lang="sass">
+@use '../styles/common'
+.wrapper
+	@include common.textbox-wrapper
+
 output
-	display: block
-	width: 170px
-	height: 20px
-	border: 1px solid grey
+	@include common.textbox
 </style>

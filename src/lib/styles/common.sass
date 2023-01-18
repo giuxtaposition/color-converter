@@ -1,0 +1,27 @@
+$border: 1px solid #e8eaed
+$shadow: 0 1px 3px -2px #9098a9
+
+@mixin textbox
+    display: block
+    padding: 0.3rem 2rem 0.3rem 0.6rem
+    border: $border
+    border-radius: 5px
+    background: white
+    box-shadow: $shadow
+    width: 200px
+    height: 20px
+
+@mixin textbox-wrapper
+    margin-top: 3.5rem
+    height: 5rem
+
+@mixin error
+    margin-top: 0.5rem
+    color: rgb(138, 20, 20)
+    font-size: 0.8rem
+    width: 15rem
+
+@mixin box
+    width: 200px
+    height: 200px
+    border: $border

@@ -1,12 +1,21 @@
 import { COLOR_MODELS_REPRESENTATIONS, type ColorModelType } from '$lib/types/ColorModel';
 
+interface colorRepresentation {
+	valuesInRepresentation: string[] | null;
+	valuesInRGB: string[] | null;
+}
+
 export async function getColorRepresentation(
 	from: ColorModelType,
 	to: ColorModelType,
 	values: string[]
-): Promise<string[] | null> {
+): Promise<colorRepresentation> {
 	if (from === 'rgb' || to === 'rgb') {
-		return await singleGet(from, to, values);
+		const result = await singleGet(from, to, values);
+		return {
+			valuesInRepresentation: result,
+			valuesInRGB: from === 'rgb' ? values : result
+		};
 	} else {
 		return multipleGet(from, to, values);
 	}
@@ -16,12 +25,22 @@ async function multipleGet(
 	from: ColorModelType,
 	to: ColorModelType,
 	values: string[]
-): Promise<string[] | null> {
+): Promise<colorRepresentation> {
 	const valuesInRGB = await singleGet(from, 'rgb', values);
 
-	if (valuesInRGB) return await singleGet('rgb', to, valuesInRGB);
+	if (valuesInRGB) {
+		const result = await singleGet('rgb', to, valuesInRGB);
 
-	return null;
+		return {
+			valuesInRepresentation: result,
+			valuesInRGB: valuesInRGB
+		};
+	}
+
+	return {
+		valuesInRepresentation: null,
+		valuesInRGB: null
+	};
 }
 
 async function singleGet(

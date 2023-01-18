@@ -4,6 +4,7 @@
 	import Input from '$lib/components/Input.svelte';
 	import Output from '$lib/components/Output.svelte';
 	import Selector from '$lib/components/Selector.svelte';
+	import ShowColor from '$lib/components/ShowColor.svelte';
 	import { getColorRepresentation } from '$lib/services/colorService';
 	import type { ColorModelType } from '$lib/types/ColorModel';
 	import { InputError, OutputError } from '$lib/types/Error';
@@ -11,11 +12,12 @@
 	let from: ColorModelType = 'rgb';
 	let to: ColorModelType = 'cmy';
 	let input: string[] = [];
-	let output: string = '';
+	let output = '';
 
 	let inputError: InputError | null = null;
 	let outputError: OutputError | null = null;
 	let isLoading = false;
+	let colorInRGB = '';
 
 	function updateFrom(newValue: ColorModelType) {
 		from = newValue;
@@ -32,11 +34,13 @@
 			isLoading = true;
 			const result = await getColorRepresentation(from, to, input);
 
-			if (result) {
-				output = result.join(', ');
+			if (result.valuesInRepresentation && result.valuesInRGB) {
+				output = result.valuesInRepresentation.join(', ');
+				colorInRGB = `rgb(${result.valuesInRGB.join(', ')})`;
 			} else {
 				outputError = OutputError.UnsuccessfulConversion;
 			}
+
 			isLoading = false;
 		}
 	}
@@ -44,7 +48,8 @@
 
 <main>
 	<Header title="Color Converter" />
-	<div>
+
+	<div class="input">
 		<Selector
 			name={'from-selector'}
 			label={'From:'}
@@ -52,6 +57,9 @@
 			bind:selected={from}
 		/>
 		<Input colorModelSelected={from} onInputChange={updateInput} bind:error={inputError} />
+	</div>
+
+	<div class="output">
 		<Selector
 			name={'to-selector'}
 			label={'To:'}
@@ -60,7 +68,32 @@
 			bind:selected={to}
 		/>
 		<Output {output} error={outputError} />
-
-		<ConvertButton isDisabled={inputError !== null} {isLoading} onClick={onSubmit} />
 	</div>
+
+	<ShowColor color={colorInRGB} />
+
+	<ConvertButton isDisabled={inputError !== null} {isLoading} onClick={onSubmit} />
 </main>
+
+<style lang="sass">
+@use '../lib/styles/common'
+
+main
+	font-size: 16px
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: center
+	padding: 0
+	margin: 0
+	min-height: 100vh
+	gap: 2rem
+
+.input, .output
+	display: flex
+	flex-direction: row
+	align-items: center
+
+.box
+	@include common.box
+</style>
