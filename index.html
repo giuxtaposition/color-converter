@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Color Converter</title>
+		<meta
+			name="description"
+			content="A simple tool to convert a color to its different representations"
+		/>
+		<meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_page-59e7cc07.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-3ab36ab9.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-bf62ad7e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-86e592b9.js">
+		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-5b43295f.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_page.svelte-5f60c148.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">
+
+
+<main class="svelte-a0c74o"><h1 class="svelte-15y6s7l">Color Converter</h1>
+
+	<div class="input svelte-a0c74o"><div class="svelte-d3w00g"><label for="from-selector" class="svelte-d3w00g">From:</label>
+
+	<select name="from-selector" id="from-selector" class="svelte-d3w00g"><option value="rgb">RGB
+			</option><option value="cmy">CMY
+			</option><option value="cmyk">CMYK
+			</option><option value="hsb">HSB
+			</option><option value="hsl">HSL
+			</option></select>
+</div>
+		<div class="wrapper svelte-1qnmqos"><input type="text" aria-label="color input" aria-required="true" aria-invalid="false" class="svelte-1qnmqos" value="(0,0,0)">
+	<div class="hint svelte-1qnmqos">(0 &lt; value &lt; 255, 0 &lt; value &lt; 255, 0 &lt; value &lt; 255)</div>
+	
+</div></div>
+
+	<div class="output svelte-a0c74o"><div class="svelte-d3w00g"><label for="to-selector" class="svelte-d3w00g">To:</label>
+
+	<select name="to-selector" id="to-selector" class="svelte-d3w00g"><option value="cmy">CMY
+			</option><option value="cmyk">CMYK
+			</option><option value="hsb">HSB
+			</option><option value="hsl">HSL
+			</option></select>
+</div>
+		<div class="wrapper svelte-w716y9"><output aria-label="color output" class="svelte-w716y9"></output>
+	
+</div></div>
+
+	<div style="background-color: ;" class="svelte-ev6vge">
+</div>
+
+	<button  class="svelte-rdfl6o">Convert
+</button>
+</main>
+
+
+		<script type="module" data-sveltekit-hydrate="mhf7e4">
+			import { start } from "./_app/immutable/start-3ab36ab9.js";
+
+			start({
+				env: {},
+				paths: {"assets":"","base":""},
+				target: document.querySelector('[data-sveltekit-hydrate="mhf7e4"]').parentNode,
+				version: "1674059153342",
+				hydrate: {
+					node_ids: [0, 2],
+					data: [null,{type:"data",data:null,uses:{}}],
+					form: null,
+					error: null
+				}
+			});
+		</script>
+	</div>
+	</body>
+</html>
