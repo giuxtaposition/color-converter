@@ -79,9 +79,11 @@
 @use '../lib/styles/common'
 
 :global(body)
+	position: fixed
 	margin: 0
 	background-color: common.$brand-50
 	min-height: 100vh
+	min-width: 100vw
 
 main
 	font-size: 16px
@@ -95,6 +97,14 @@ main
 	gap: 2rem
 	box-shadow: common.$shadow
 	border-radius: 5px
+
+@media (max-width: 600px)
+	main
+		width: 100vw
+		height: 100vh
+		margin: 0
+		padding: 0
+		gap: 1rem
 
 .input, .output
 	display: flex
