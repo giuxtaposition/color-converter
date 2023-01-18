@@ -4,13 +4,12 @@
 
 	export let colorModelSelected: ColorModelType;
 	export let error: InputError | null;
-	export let onError: (error: InputError | null) => void;
 	export let onInputChange: (values: string[]) => void;
 
 	$: hint = () => {
 		const allMinMax = COLOR_MODELS_MIN_MAX[colorModelSelected];
 
-		return allMinMax.map((min_max, index) => `${min_max[0]} < value < ${min_max[1]}`).join(', ');
+		return allMinMax.map((min_max) => `${min_max[0]} < value < ${min_max[1]}`).join(', ');
 	};
 
 	$: isValidInput = error === null;
@@ -23,11 +22,11 @@
 		const values = parse(event.currentTarget.value);
 
 		if (!values || values.length !== colorModelSelected.length) {
-			onError(InputError.InvalidNumberOfValues);
+			error = InputError.InvalidNumberOfValues;
 			return;
 		}
 
-		onError(validate(values));
+		error = validate(values);
 		onInputChange(values);
 	}
 

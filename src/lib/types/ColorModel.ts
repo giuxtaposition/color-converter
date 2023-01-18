@@ -30,3 +30,11 @@ export const COLOR_MODELS_MIN_MAX = {
 } as const;
 
 export type ColorModelType = (typeof COLOR_MODELS)[number];
+
+export const COLOR_MODELS_REPRESENTATIONS = {
+	rgb: ['red', 'green', 'blue'],
+	cmy: ['cyan', 'magenta', 'yellow'],
+	cmyk: ['cyan', 'magenta', 'yellow', 'black'],
+	hsb: ['hue', 'saturation', 'brightness'],
+	hsl: ['hue', 'saturation', 'lightness']
+} as const;

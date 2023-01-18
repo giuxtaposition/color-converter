@@ -107,4 +107,42 @@ describe('Home page', () => {
 			expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 		});
 	});
+
+	test('should disable convert button if input is not valid', async () => {
+		render(Page);
+
+		await userEvent.type(
+			screen.getByRole('textbox', {
+				name: /color input/i
+			}),
+			'0'
+		);
+
+		await waitFor(() => {
+			expect(
+				screen.getByRole('button', {
+					name: /Convert/i
+				})
+			).toBeDisabled();
+		});
+	});
+
+	test('should enable convert button if input is valid', async () => {
+		render(Page);
+
+		await userEvent.type(
+			screen.getByRole('textbox', {
+				name: /color input/i
+			}),
+			'0,0,0'
+		);
+
+		await waitFor(() => {
+			expect(
+				screen.getByRole('button', {
+					name: /Convert/i
+				})
+			).toBeEnabled();
+		});
+	});
 });
