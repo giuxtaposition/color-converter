@@ -5,14 +5,14 @@
 	export let label: string;
 	export let optionToRemove: ColorModelType | null = null;
 	export let selected: ColorModelType;
-	export let updateSelect: (selected: ColorModelType) => void;
+	export let onSelectOverlap: (selected: ColorModelType) => void;
 
 	$: colorModels = COLOR_MODELS.filter((representation) => representation !== optionToRemove);
 	$: onOverlap(selected, optionToRemove);
 
 	function onOverlap(selected: ColorModelType, optionToRemove: ColorModelType | null) {
 		if (selected === optionToRemove) {
-			updateSelect(colorModels[0]);
+			onSelectOverlap(colorModels[0]);
 		}
 	}
 </script>

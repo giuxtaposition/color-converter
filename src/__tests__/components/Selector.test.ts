@@ -6,7 +6,12 @@ import { COLOR_MODELS } from '$lib/types/ColorModel';
 
 describe('Selector', () => {
 	test('should correctly set default option', () => {
-		render(Selector, { name: 'aName', label: 'aLabel', selected: 'cmyk', updateSelect: vi.fn() });
+		render(Selector, {
+			name: 'aName',
+			label: 'aLabel',
+			selected: 'cmyk',
+			onSelectOverlap: vi.fn()
+		});
 
 		expect(
 			(
@@ -22,7 +27,7 @@ describe('Selector', () => {
 			name: 'aName',
 			label: 'aLabel',
 			selected: 'cmyk',
-			updateSelect: vi.fn()
+			onSelectOverlap: vi.fn()
 		});
 
 		expect(
@@ -37,7 +42,7 @@ describe('Selector', () => {
 			name: 'aName',
 			label: 'aLabel',
 			selected: 'cmyk',
-			updateSelect: vi.fn()
+			onSelectOverlap: vi.fn()
 		});
 
 		COLOR_MODELS.forEach((representation) => {
@@ -54,7 +59,7 @@ describe('Selector', () => {
 			name: 'aName',
 			label: 'aLabel',
 			selected: 'cmyk',
-			updateSelect: vi.fn(),
+			onSelectOverlap: vi.fn(),
 			optionToRemove: 'hsb'
 		});
 
@@ -80,7 +85,7 @@ describe('Selector', () => {
 			label: 'aLabel',
 			selected: 'cmy',
 			optionToRemove: 'cmy',
-			updateSelect: updateSelect
+			onSelectOverlap: updateSelect
 		});
 
 		expect(updateSelect).toHaveBeenCalled();

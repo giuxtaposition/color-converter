@@ -17,7 +17,7 @@ export async function getColorRepresentation(
 			valuesInRGB: from === 'rgb' ? values : result
 		};
 	} else {
-		return multipleGet(from, to, values);
+		return await multipleGet(from, to, values);
 	}
 }
 
@@ -48,14 +48,13 @@ async function singleGet(
 	to: ColorModelType,
 	values: string[]
 ): Promise<string[] | null> {
-	const url = new URL(`https://api.color-space.doesntexist.xyz/dev/${from}/${to}`);
-
 	const currentColorModel = COLOR_MODELS_REPRESENTATIONS[from];
 
 	const params = values.map((value, index) => {
 		return [currentColorModel[index], value.toString()];
 	});
 
+	const url = new URL(`https://api.color-space.doesntexist.xyz/dev/${from}/${to}`);
 	url.search = new URLSearchParams(params).toString();
 
 	const response = await fetch(url, {

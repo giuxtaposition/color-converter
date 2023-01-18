@@ -6,7 +6,7 @@
 	export let colorModelSelected: ColorModelType;
 	export let error: InputError | null;
 	export let onInputChange: (values: string[]) => void;
-	let input = '(0,0,0)';
+	let input = '(148, 208, 240)';
 
 	$: hint = COLOR_MODELS_MIN_MAX[colorModelSelected]
 		.map(([min, max]) => `${min} < value < ${max}`)

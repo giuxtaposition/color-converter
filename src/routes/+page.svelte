@@ -17,17 +17,7 @@
 	let inputError: InputError | null = null;
 	let outputError: OutputError | null = null;
 	let isLoading = false;
-	let colorInRGB = '';
-
-	function updateFrom(newValue: ColorModelType) {
-		from = newValue;
-	}
-	function updateTo(newValue: ColorModelType) {
-		to = newValue;
-	}
-	function updateInput(newValue: string[]) {
-		input = newValue;
-	}
+	let colorInRGB = 'rgb(148, 208, 240)';
 
 	async function onSubmit() {
 		if (!inputError) {
@@ -53,10 +43,14 @@
 		<Selector
 			name={'from-selector'}
 			label={'From:'}
-			updateSelect={updateFrom}
+			onSelectOverlap={(newValue) => (from = newValue)}
 			bind:selected={from}
 		/>
-		<Input colorModelSelected={from} onInputChange={updateInput} bind:error={inputError} />
+		<Input
+			colorModelSelected={from}
+			onInputChange={(newValue) => (input = newValue)}
+			bind:error={inputError}
+		/>
 	</div>
 
 	<div class="output">
@@ -64,7 +58,7 @@
 			name={'to-selector'}
 			label={'To:'}
 			optionToRemove={from}
-			updateSelect={updateTo}
+			onSelectOverlap={(newValue) => (to = newValue)}
 			bind:selected={to}
 		/>
 		<Output {output} error={outputError} />
